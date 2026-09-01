@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dice Game</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      padding-top: 50px;
+    }
+
+    /* Container to center the dice */
+    .dice-container {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+    }
+
+    /* Main Dice Box Styling */
+    .dice {
+      width: 100px;
+      height: 100px;
+      background-color: #ffffff;
+      border: 3px solid #333;
+      border-radius: 15px;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    /* Red Dots Inside Dice */
+    .dot {
+      width: 18px;
+      height: 18px;
+      background-color: #d9534f;
+      border-radius: 50%;
+    }
+
+    /* Helper Class to Hide Dice */
+    .hide {
+      display: none !important;
+    }
+
+    /* Custom Button */
+    #go {
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #0275d8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.2s ease;
+    }
+
+    #go:hover {
+      background-color: #025aa5;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Dice Simulator</h2>
+  
+  <div class="dice-container">
+    <!-- Dice 1 -->
+    <div id="dice-1" class="dice hide">
+      <span class="dot"></span>
+    </div>
+
+    <!-- Dice 2 -->
+    <div id="dice-2" class="dice hide">
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- Dice 3 -->
+    <div id="dice-3" class="dice hide">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- Dice 4 -->
+    <div id="dice-4" class="dice hide">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- Dice 5 -->
+    <div id="dice-5" class="dice hide">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <!-- Dice 6 -->
+    <div id="dice-6" class="dice hide">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <button id="go">Roll Dice 🎲</button>
+
+  <script>
+    // Target button using document.querySelector
+    const btnGo = document.querySelector('#go');
+
+    // Target all 6 dice elements
+    const dice1 = document.querySelector('#dice-1');
+    const dice2 = document.querySelector('#dice-2');
+    const dice3 = document.querySelector('#dice-3');
+    const dice4 = document.querySelector('#dice-4');
+    const dice5 = document.querySelector('#dice-5');
+    const dice6 = document.querySelector('#dice-6');
+
+    // Store all dice in an array for easy hiding
+    const allDice = [dice1, dice2, dice3, dice4, dice5, dice6];
+
+    // Helper function to hide all dice faces
+    function hideAllDice() {
+      allDice.forEach(dice => {
+        dice.classList.add('hide');
+      });
+    }
+
+    // Button Click Event Listener
+    btnGo.addEventListener('click', function() {
+      // 1. Hide any currently shown dice
+      hideAllDice();
+
+      // 2. Generate random number between 1 and 6
+      const min = 1;
+      const max = 6;
+      const ranNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
+      // 3. Switch Case to show the matched dice face
+      switch (ranNum) {
+        case 1:
+          dice1.classList.remove('hide');
+          break;
+        case 2:
+          dice2.classList.remove('hide');
+          break;
+        case 3:
+          dice3.classList.remove('hide');
+          break;
+        case 4:
+          dice4.classList.remove('hide');
+          break;
+        case 5:
+          dice5.classList.remove('hide');
+          break;
+        case 6:
+          dice6.classList.remove('hide');
+          break;
+        default:
+          console.log("Invalid number generated.");
+      }
+    });
+  </script>
+</body>
+</html>
