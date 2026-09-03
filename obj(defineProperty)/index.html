@@ -1,17 +1,40 @@
-<input type="text" id="mark" placeholder="Enter student mark" />
-<input type="text" id="name" placeholder="Enter student name" />
-<input type="text" id="sheetno" placeholder="enter sheet no" />
-<button id="submit">Submit</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Secrecy System</title>
+</head>
+<body>
 
-<table id="list" style="display: none;">
-  <tr>
-    <th>Marks</th>
-    <th>Sheet No</th>
-  </tr>
-  <tr>
-    <td id="m"></td>
-    <td id="s"></td>
-  </tr>
-</table>
+   
+    <div>
+        <input type="text" id="mark" placeholder="Enter student mark" />
+        <input type="text" id="name" placeholder="Enter student name" />
+        <input type="text" id="sheetno" placeholder="Enter sheet no" />
+        <button id="submit">Submit</button>
+    </div>
 
-<button id="loop">print list</button>
+    <br />
+
+    <!-- Table output -->
+    <table id="list" border="1" style="display: none;">
+        <thead>
+            <tr>
+                <th>Marks</th>
+                <th>Sheet No</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            
+        </tbody>
+    </table>
+
+    <br />
+
+    <button id="loop">Print List</button>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
