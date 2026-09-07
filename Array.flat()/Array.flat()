@@ -1,0 +1,14 @@
+# Digital Khata App (Array.prototype.flat() Demo)
+
+A simple, practical JavaScript demonstration showing how `Array.prototype.flat()` works in a real-world scenario—building a daily **Digital Khata (Ledger)**.
+
+---
+
+##  The Thought Process & Concept Flow
+
+Understanding abstract programming concepts like `Array.prototype.flat()` can be tricky when looking at basic syntax alone. This project was conceptualized through a real-life retail ledger analogy:
+
+```text
+[ Customer Input ] ──> [ Sub-Array (Session/Transaction) ] ──> [ Main Ledger (Nested Array) ]
+                                                                             │
+[ Rendered List ] <── [ Flattened 1D Array ] <── [ Array.prototype.flat() ] ─┘
