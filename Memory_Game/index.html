@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Card Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    #main {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 100px;
+      height: 140px;
+      background-color: #3498db;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Memory Card Game</h1>
+  <h2 id="score">Score: 0</h2>
+  <div id="main"></div>
+
+  <script>
+    const main = document.querySelector("#main");
+    const scoreElement = document.querySelector("#score");
+
+    const cards = [
+      { name: "UNO", hide: "Doll" },
+      { name: "UNO", hide: "Bear" },
+      { name: "UNO", hide: "Doll" },
+      { name: "UNO", hide: "Bear" }
+    ];
+
+    let card1 = null;
+    let card2 = null;
+    let card1Element = null;
+    let card2Element = null;
+    let score = 0;
+
+    // Cards Render Karna
+    function displayCards(cd) {
+      const list = cd.map((item, index) => {
+        return `<div class="card" data-index="${index}">${item.name}</div>`;
+      });
+      main.innerHTML = list.join("");
+    }
+
+    displayCards(cards);
+
+    
+    main.addEventListener("click", function(e) {
+      // Sirf card par click hone par chalega
+      if (!e.target.classList.contains("card")) return;
+
+      const index = e.target.getAttribute("data-index");
+
+   
+      if (!card1) {
+        card1 = cards[index];
+        card1Element = e.target;
+        card1Element.innerText = card1.hide; // Text reveal karo
+      } 
+     
+      else if (!card2 && e.target !== card1Element) {
+        card2 = cards[index];
+        card2Element = e.target;
+        card2Element.innerText = card2.hide; // Text reveal karo
+
+       
+        if (card1.hide === card2.hide) {
+          score += 1;
+          scoreElement.innerText = "Score: " + score;
+          
+          card1 = null;
+          card2 = null;
+        } else {
+          
+          setTimeout(() => {
+            card1Element.innerText = card1.name;
+            card2Element.innerText = card2.name;
+            card1 = null;
+            card2 = null;
+          }, 1000);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
