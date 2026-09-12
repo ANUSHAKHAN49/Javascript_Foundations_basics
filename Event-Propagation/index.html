@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Propagation & stopPropagation Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    div { padding: 30px; border: 2px solid #333; border-radius: 8px; margin: 10px 0; }
+    #grandparent { background-color: #ffe6e6; }
+    #parent { background-color: #e6ffe6; }
+    #child { background-color: #e6f2ff; }
+    button, a { margin: 5px; padding: 10px 15px; font-size: 14px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <h2>JavaScript Event Propagation Demo</h2>
+
+  <!-- Nested HTML Structure -->
+  <div id="grandparent">
+    <strong>Grandparent Div</strong>
+    
+    <div id="parent">
+      <strong>Parent Div</strong>
+      
+      <div id="child">
+        <strong>Child Div</strong><br><br>
+        
+        <!-- Buttons to test different concepts -->
+        <button id="btnBubbling">1. Normal Bubbling Test</button>
+        <button id="btnStop">2. Test stopPropagation()</button>
+        <a href="https://google.com" id="linkPrevent">3. Test preventDefault()</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const grandparent = document.querySelector('#grandparent');
+    const parent = document.querySelector('#parent');
+    const child = document.querySelector('#child');
+    
+    const btnBubbling = document.querySelector('#btnBubbling');
+    const btnStop = document.querySelector('#btnStop');
+    const linkPrevent = document.querySelector('#linkPrevent');
+
+    
+    // 1. EVENT BUBBLING (Default: Inner -> Outer)
+    
+    btnBubbling.addEventListener('click', (e) => {
+      console.log('1. Button Clicked!');
+    });
+
+    child.addEventListener('click', () => {
+      console.log('2. Child Div Triggered (Bubbling)');
+    });
+
+    parent.addEventListener('click', () => {
+      console.log('3. Parent Div Triggered (Bubbling)');
+    });
+
+    
+    // 2. EVENT CAPTURING (Outer -> Inner)
+    // Third parameter is 'true' for Capturing phase
+    
+    grandparent.addEventListener('click', () => {
+      console.log('0. Grandparent Triggered FIRST (Capturing Phase)');
+    }, true);
+
+
+    
+    // 3. STOP PROPAGATION (Bubbling ko rokna)
+    
+    btnStop.addEventListener('click', (e) => {
+      // Event yahan ruk jayega, upar Child/Parent/Grandparent tak nahi jayega
+      e.stopPropagation(); 
+      console.log('Stop Propagation Clicked! (Parent elements trigger nahi honge)');
+    });
+
+
+    
+    // 4. PREVENT DEFAULT (Default behavior rokna)
+    
+    linkPrevent.addEventListener('click', (e) => {
+      // Link open hone se rok dega lekin event bubbling chalegi
+      e.preventDefault(); 
+      console.log('Link click hua, par Google par navigate nahi karega!');
+    });
+  </script>
+</body>
+</html>
